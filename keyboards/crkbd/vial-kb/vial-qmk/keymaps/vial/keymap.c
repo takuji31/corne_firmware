@@ -113,3 +113,39 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
   [3] = { ENCODER_CCW_CW(RGB_MOD, RGB_RMOD), ENCODER_CCW_CW(RGB_HUI, RGB_HUD), ENCODER_CCW_CW(RGB_VAI, RGB_VAD), ENCODER_CCW_CW(RGB_SAI, RGB_SAD), },
 };
 #endif
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+    state = update_tri_layer_state(state, 2, 3, 4);
+    state = update_tri_layer_state(state, 5, 6, 7);
+
+    switch (get_highest_layer(state)) {
+        case 0:
+            rgblight_sethsv(HSV_BLACK);
+            break;
+        case 1:
+            rgblight_sethsv(HSV_RED);
+            break;
+        case 2:
+            rgblight_sethsv(HSV_BLUE);
+            break;
+        case 3:
+            rgblight_sethsv(HSV_GREEN);
+            break;
+        case 4:
+            rgblight_sethsv(HSV_ORANGE);
+            break;
+        case 5:
+            rgblight_sethsv(HSV_CHARTREUSE);
+            break;
+        case 6:
+            rgblight_sethsv(HSV_CYAN);
+            break;
+        case 7:
+            rgblight_sethsv(HSV_PINK);
+            break;
+        default:
+            rgblight_sethsv(HSV_BLACK);
+            break;
+    }
+    return state;
+};
